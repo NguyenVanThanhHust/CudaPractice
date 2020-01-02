@@ -1,2 +1,2 @@
 # CudaPratice
-Pratice Cuda Examples
+Pratice Cuda Examples from NVIDIA
