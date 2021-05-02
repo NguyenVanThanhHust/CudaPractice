@@ -22,7 +22,6 @@ void verify_result(std::array<int, 2048> &a, std::array<int, 2048> &b, std::arra
 {
     for(int i=0; i < a.size(); i++)
     {
-        std::cout<<i<<c[i]<<a[i]<<b[i]<<std::endl;
         assert(c[i] == a[i] + b[i]);
     }
 }
@@ -58,11 +57,6 @@ int main()
 
     // Copy from device to host
     cudaMemcpy(h_c.data(), d_c, array_size, cudaMemcpyDeviceToHost);
-    for(int i=0; i < 10; i++)
-    {
-        std::cout<<h_c[i]<<std::endl;
-
-    }
     // Check the result
     verify_result(h_a, h_b, h_c);
 
