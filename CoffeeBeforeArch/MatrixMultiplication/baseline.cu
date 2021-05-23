@@ -4,6 +4,8 @@
 #include <functional>
 #include <iostream>
 #include <vector>
+#include <cuda_runtime.h>
+#include "helper_cuda.h"
 
 using std::cout;
 using std::generate;
