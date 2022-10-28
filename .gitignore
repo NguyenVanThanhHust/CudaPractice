@@ -4,3 +4,7 @@
 *.ptx
 *.cubin
 *.fatbin
+NeuralNetwork/build/*
+NeuralNetwork/mnist_data/*
+*.jpg
+.vscode
