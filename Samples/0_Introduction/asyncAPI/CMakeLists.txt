@@ -11,14 +11,11 @@ add_executable(asyncAPI asyncAPI.cu)
 
 include_directories(asyncAPI
   ../../Common/
-  /usr/local/cuda-11.2/include
-  /usr/include/gstreamer-1.0
-  /usr/include/glib-2.0
-  /usr/lib/x86_64-linux-gnu/glib-2.0/include
+  /usr/local/cuda-12.0/include
 )
 
 link_directories(asyncAPI
-  /usr/local/cuda-11.2/lib64/
+  /usr/local/cuda-12.0/lib64/
   /usr/local/cuda/lib64/
 )
 
