@@ -12,4 +12,4 @@ __global__ void sigmoidActivationForward(float *input, float *output, int input_
     }
 };
 
-__global__ void sigmoidActivattionBackward(float)
+__global__ void sigmoidActivattionBackward(float *)
