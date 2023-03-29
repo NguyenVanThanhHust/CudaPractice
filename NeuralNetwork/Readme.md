@@ -1,1 +1,0 @@
-https://github.com/skyde1021/CUDA_CNN
