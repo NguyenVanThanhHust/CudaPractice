@@ -32,9 +32,7 @@ int main()
             h_A[row_index][col_index] = float(row_index * MATRIX_WIDTH + 1);
             h_B[row_index][col_index] = float(row_index * MATRIX_WIDTH + 2);
         }
-        
     }
-    
-    
 
+    return 0;
 }

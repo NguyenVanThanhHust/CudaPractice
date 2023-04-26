@@ -15,7 +15,6 @@ include_directories(simpleVectorAdd
   ../app-common/includes/
   ../includes/
   /usr/local/cuda-11.2/include
-  /usr/include/gstreamer-1.0
   /usr/include/glib-2.0
   /usr/lib/x86_64-linux-gnu/glib-2.0/include
 )
