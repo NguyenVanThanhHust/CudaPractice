@@ -72,7 +72,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
+    err = cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
     if (err != cudaSuccess)
     {
         cout<<"Failed to copy from host vector B to device vector B "<<cudaGetErrorString(err)<<" at file: "<<__FILE__<<" at line: "<<__LINE__<<endl;
