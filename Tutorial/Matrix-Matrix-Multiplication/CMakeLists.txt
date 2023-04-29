@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 option(USE_CUDA "Use CUDA" ON)
 
 add_executable(mat_mul 
-    # main.cu
-    main_simple.cu
+    main.cu
+    # main_simple.cu
     )
 
 include_directories(
