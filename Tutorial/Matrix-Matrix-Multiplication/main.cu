@@ -17,7 +17,7 @@ __global__ void matMulKernel(float *d_A, float *d_B, float *d_C, int height_A, i
 {
     int row_threadIdx = blockDim.x * blockIdx.x + threadIdx.x;
     int col_threadIdx = blockDim.y * blockIdx.y + threadIdx.y;
-    if(row_threadIdx < height_A && col_threadIdx)
+    if(row_threadIdx < height_A && col_threadIdx < width_B)
     {
         float temp_value = 0;
         for(int i=0; i < width_A; i++)
