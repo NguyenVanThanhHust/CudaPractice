@@ -11,11 +11,10 @@ add_executable(asyncAPI asyncAPI.cu)
 
 include_directories(asyncAPI
   ../../Common/
-  /usr/local/cuda-12.0/include
+  /usr/local/cuda/include
 )
 
 link_directories(asyncAPI
-  /usr/local/cuda-12.0/lib64/
   /usr/local/cuda/lib64/
 )
 
