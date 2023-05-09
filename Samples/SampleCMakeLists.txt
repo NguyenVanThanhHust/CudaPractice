@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 project(deepstream)
 
 set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS "-std=c++17 -O3 -pthread")
+set (CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS " -O3 -pthread")
 
 find_package(OpenCV REQUIRED)
 
@@ -17,15 +18,11 @@ message("OpenCV include dir")
 message(${OpenCV_INCLUDE_DIRS})
 
 include_directories(main
-  /usr/local/cuda-11.8/include
-  /usr/include/gstreamer-1.0
-  /usr/include/glib-2.0
-  /usr/lib/x86_64-linux-gnu/glib-2.0/include
+  /usr/local/cuda/include
   ${OpenCV_INCLUDE_DIRS}
 )
 
 link_directories(
-  /usr/local/cuda-11.8/lib64/
   /usr/local/cuda/lib64/
 )
 
