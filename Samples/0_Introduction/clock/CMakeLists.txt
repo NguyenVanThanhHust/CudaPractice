@@ -11,11 +11,10 @@ add_executable(clock clock.cu)
 
 include_directories(clock
   ../../Common/
-  /usr/local/cuda-12.0/include
+  /usr/local/cuda/include
 )
 
 link_directories(clock
-  /usr/local/cuda-12.0/lib64/
   /usr/local/cuda/lib64/
 )
 

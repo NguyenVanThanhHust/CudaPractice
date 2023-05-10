@@ -1,0 +1,2 @@
+# Async API
+Use CUDA events for both GPU timimg and overlapping CPU and GPU execution. CPU can perform computations while GPU is executing. CPU can query CUDA events to determine wheter GPU completed task. 
