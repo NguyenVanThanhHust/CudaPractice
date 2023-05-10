@@ -27,11 +27,8 @@ __global__ void matMulKernel(float *d_A, float *d_B, float *d_C, int N)
     }
 };
 
-int main(int argc, char **argv)
+void matMal(int N)
 {
-    int N;
-    N = std::stoi(argv[1]);
-    
     // Declare host array
     float *h_A, *h_B, *h_C, *cpu_C;
 
@@ -164,5 +161,13 @@ int main(int argc, char **argv)
     delete[] h_C;
     delete[] cpu_C;
 
+};
+
+
+int main(int argc, char **argv)
+{
+    int N;
+    N = std::stoi(argv[1]);
+    matMal(N);   
     return 0;
 }

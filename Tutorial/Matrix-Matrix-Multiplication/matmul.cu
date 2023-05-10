@@ -28,15 +28,8 @@ __global__ void matMulKernel(float *d_A, float *d_B, float *d_C, int height_A, i
     }
 };
 
-int main(int argc, char **argv)
+void matMul(int height_A, int width_A, int height_B, int width_B)
 {
-    int height_A, width_A, height_B, width_B;
-    height_A = std::stoi(argv[1]);
-    width_A = std::stoi(argv[2]);
-    height_B = std::stoi(argv[3]);
-    width_B = std::stoi(argv[4]);
-    assertm(width_A==height_B, "height matrix A must equal to width of matrix B");
-    
     // Declare host array
     float *h_A, *h_B, *h_C, *cpu_C;
 
@@ -174,6 +167,17 @@ int main(int argc, char **argv)
     delete[] h_B;
     delete[] h_C;
     delete[] cpu_C;
+};
 
+
+int main(int argc, char **argv)
+{
+    int height_A, width_A, height_B, width_B;
+    height_A = std::stoi(argv[1]);
+    width_A = std::stoi(argv[2]);
+    height_B = std::stoi(argv[3]);
+    width_B = std::stoi(argv[4]);
+    assertm(width_A==height_B, "height matrix A must equal to width of matrix B");
+    matMul(height_A, width_A, height_B, width_B);    
     return 0;
 }

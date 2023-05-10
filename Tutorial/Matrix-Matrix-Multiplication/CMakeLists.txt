@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 option(USE_CUDA "Use CUDA" ON)
 
-add_executable(mat_mul 
+add_executable(matmul 
     matmul.cu
     )
 
@@ -20,7 +20,7 @@ include_directories(
     /usr/local/cuda/lib64/
     )
 
-target_link_libraries(mat_mul 
+target_link_libraries(matmul 
     ${CUDA_LIBRARIES}
     /usr/local/cuda/lib64/libcudart.so
     )
@@ -29,6 +29,7 @@ target_link_libraries(matmul_simple
     ${CUDA_LIBRARIES}
     /usr/local/cuda/lib64/libcudart.so
     )
+
 
 message(STATUS "USE_CUDA: ${USE_CUDA}")
 if(USE_CUDA)
