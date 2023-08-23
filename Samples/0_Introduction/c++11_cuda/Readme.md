@@ -1,0 +1,1 @@
+This sample scans a input text file and print number of x, y, z, w characters in text file
