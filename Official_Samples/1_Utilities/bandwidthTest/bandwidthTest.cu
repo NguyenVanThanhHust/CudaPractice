@@ -59,7 +59,7 @@ void testBandwidth(unsigned int start, unsigned int end, unsigned int increment,
                 testMode mode, memcpyKind kind, printMode printmode,
                 memoryMode memMode, int startDevice, int endDevice, bool wc);
 
-void testBandwidthWidth(unsigned int size, memcpyKind kind, printMode, printmode, 
+void testBandwidthWidth(unsigned int size, memcpyKind kind, printMode printmode, 
                 memoryMode memMode, int startDevice, int endDevice, bool wc);
 
 
