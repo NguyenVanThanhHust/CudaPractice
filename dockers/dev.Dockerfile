@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -39,7 +39,7 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.10 get-pi
 WORKDIR /opt/
 RUN python3.10 -m pip install cmake
 
-RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/4.9.0.zip
+RUN wget --no-check-certificate -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/4.9.0.zip
 RUN apt update && apt install unzip -y
 RUN unzip opencv.zip
 
