@@ -1,2 +1,2 @@
-# simplePrintf
-This basic CUDA Runtime API sample demonstrates how to use the printf function in the device code.
+# simpleAssert
+This CUDA Runtime API sample is a very basic sample that implements how to use the assert function in the device code.
