@@ -5,7 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "matmul_cpu.hpp"
+#include "matmul_cpu.h"
 #include "matmul_gpu.cuh"
 
 using std::cout;

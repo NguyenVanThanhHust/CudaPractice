@@ -56,14 +56,14 @@ int main()
     vectorAdd<<<NUM_BLOCKS, NUM_THREADS>>>(d_a, d_b, d_c, NUM_ELEM);
 
     // Copy from device to host
-    cudaMemcpy(h_c.data(), d_c, array_size, cudaMemcpyDeviceToHost);
+    checkCudaErrors(cudaMemcpy(h_c.data(), d_c, array_size, cudaMemcpyDeviceToHost));
     // Check the result
     verify_result(h_a, h_b, h_c);
 
     // Free CUDA memory
-    cudaFree(d_a);
-    cudaFree(d_b);
-    cudaFree(d_c);
+    checkCudaErrors(cudaFree(d_a));
+    checkCudaErrors(cudaFree(d_b));
+    checkCudaErrors(cudaFree(d_c));
 
     std::cout<<"COMPLETE!!!"; 
     return 0;

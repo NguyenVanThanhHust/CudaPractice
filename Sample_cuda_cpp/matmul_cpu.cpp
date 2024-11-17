@@ -1,4 +1,4 @@
-#include "matmul_cpu.hpp"
+#include "matmul_cpu.h"
 
 void runOnCPU(int *a, int *b, int *c, int m, int n, int p)
 {

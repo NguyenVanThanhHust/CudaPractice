@@ -36,5 +36,10 @@ void matmul(int *host_a, int *host_b, int *host_c, int m, int n, int p)
     dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
 
     matmul_kernel<<<dimGrid, dimBlock>>>(dev_a, dev_b, dev_c, m, n, p);
+
+    // Free CUDA memory
+    checkCudaErrors(cudaFree(dev_a));
+    checkCudaErrors(cudaFree(dev_b));
+    checkCudaErrors(cudaFree(dev_c));
     
 }
