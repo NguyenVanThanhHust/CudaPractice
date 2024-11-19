@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.18)
-project(matmul_cuda_cpp LANGUAGES CXX CUDA)
+project(knn_gpu LANGUAGES CXX CUDA)
 
 # Optionally, link against CUDA libraries
 find_package(CUDAToolkit REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 14)
@@ -16,23 +17,33 @@ string(REPLACE "." "" CUDA_ARCH_LIST "${INSTALLED_GPU_CCS_3}")
 SET(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCH_LIST})
 message("$(CUDA_ARCH_LIST)")
 
+message("OpenCV include dir")
+message(${OpenCV_INCLUDE_DIRS})
+
+
+include_directories(main
+    /usr/local/cuda/include
+    ../../Common
+    ${OpenCV_INCLUDE_DIRS}
+)
+
 # Specify the CUDA source file 
 set(CUDA_SRC 
     helper_cuda.h
     helper_string.h
-    matmul_gpu.cuh 
-    matmul_gpu.cu) 
+    bgr2gray.cuh 
+    bgr2gray.cu) 
 
 # Create the CUDA shared library 
-add_library(cuda_matmul_kernel SHARED ${CUDA_SRC})
+add_library(cuda_bgr2gray SHARED ${CUDA_SRC})
 
 # Specify the C++ source file for library
 set(CPP_SRC 
-    matmul_cpu.h 
-    matmul_cpu.cpp) 
+    bgr2gray.h 
+    bgr2gray.cpp) 
 
 # Create the C++ shared library 
-add_library(cpu_matmul SHARED ${CPP_SRC})
+add_library(cpu_bgr2gray SHARED ${CPP_SRC})
 
 # Specify the C++ source file for executable progra
 set(EXE_PROG_SRC main.cpp) 
@@ -46,4 +57,4 @@ set_target_properties(main_program PROPERTIES
 )
 
 # Link the executable against the CUDA shared library 
-target_link_libraries(main_program cuda_matmul_kernel cpu_matmul ${CUDA_CUDART_LIBRARY} CUDA::cudart)
+target_link_libraries(main_program cuda_matmul_kernel cpu_matmul ${CUDA_CUDART_LIBRARY} ${OpenCV_LIBS} CUDA::cudart)

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
-project(matmul_cuda_cpp LANGUAGES CXX CUDA)
+project(knn_gpu LANGUAGES CXX CUDA)
 
 # Optionally, link against CUDA libraries
 find_package(CUDAToolkit REQUIRED)
@@ -16,23 +16,16 @@ string(REPLACE "." "" CUDA_ARCH_LIST "${INSTALLED_GPU_CCS_3}")
 SET(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCH_LIST})
 message("$(CUDA_ARCH_LIST)")
 
+
 # Specify the CUDA source file 
 set(CUDA_SRC 
     helper_cuda.h
     helper_string.h
-    matmul_gpu.cuh 
-    matmul_gpu.cu) 
+    template_add.cuh 
+    template_add.cu) 
 
 # Create the CUDA shared library 
-add_library(cuda_matmul_kernel SHARED ${CUDA_SRC})
-
-# Specify the C++ source file for library
-set(CPP_SRC 
-    matmul_cpu.h 
-    matmul_cpu.cpp) 
-
-# Create the C++ shared library 
-add_library(cpu_matmul SHARED ${CPP_SRC})
+add_library(cuda_add_kernel SHARED ${CUDA_SRC})
 
 # Specify the C++ source file for executable progra
 set(EXE_PROG_SRC main.cpp) 
@@ -46,4 +39,4 @@ set_target_properties(main_program PROPERTIES
 )
 
 # Link the executable against the CUDA shared library 
-target_link_libraries(main_program cuda_matmul_kernel cpu_matmul ${CUDA_CUDART_LIBRARY} CUDA::cudart)
+target_link_libraries(main_program cuda_add_kernel ${CUDA_CUDART_LIBRARY} CUDA::cudart)
