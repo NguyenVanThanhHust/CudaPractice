@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
-project(knn_gpu LANGUAGES CXX CUDA)
+project(convert_bgr2gray LANGUAGES CXX CUDA)
 
 # Optionally, link against CUDA libraries
 find_package(CUDAToolkit REQUIRED)
@@ -21,6 +21,9 @@ message("OpenCV include dir")
 message(${OpenCV_INCLUDE_DIRS})
 
 
+###########################
+## main program here#######
+###########################
 include_directories(main
     /usr/local/cuda/include
     ../../Common
@@ -45,6 +48,14 @@ set(CPP_SRC
 # Create the C++ shared library 
 add_library(cpu_bgr2gray SHARED ${CPP_SRC})
 
+# Specify the C++ source file for library
+set(UTILS_CPP_SRC 
+    utils.h 
+    utils.cpp) 
+
+# Create the C++ shared library 
+add_library(utils SHARED ${UTILS_CPP_SRC})
+
 # Specify the C++ source file for executable progra
 set(EXE_PROG_SRC main.cpp) 
 # Create the executable from the C++ source file 
@@ -57,4 +68,4 @@ set_target_properties(main_program PROPERTIES
 )
 
 # Link the executable against the CUDA shared library 
-target_link_libraries(main_program cuda_matmul_kernel cpu_matmul ${CUDA_CUDART_LIBRARY} ${OpenCV_LIBS} CUDA::cudart)
+target_link_libraries(main_program cuda_bgr2gray cpu_bgr2gray utils ${CUDA_CUDART_LIBRARY} ${OpenCV_LIBS} CUDA::cudart)

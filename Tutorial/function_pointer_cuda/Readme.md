@@ -1,1 +1,0 @@
-https://leimao.github.io/blog/Pass-Function-Pointers-to-Kernels-CUDA/

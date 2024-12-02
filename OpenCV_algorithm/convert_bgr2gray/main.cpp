@@ -33,31 +33,12 @@
 #include <helper_cuda.h>         // helper functions for CUDA error check
 // #include <helper_cuda_gl.h>      // helper functions for CUDA/GL interop
 
+#include "bgr2gray.h"
+#include "bgr2gray.cuh"
+#include "utils.h"
+
 using std::cout;
 using std::endl;
-
-std::string type2str(int type) {
-    std::string r;
-
-    uchar depth = type & CV_MAT_DEPTH_MASK;
-    uchar chans = 1 + (type >> CV_CN_SHIFT);
-
-    switch ( depth ) {
-        case CV_8U:  r = "8U"; break;
-        case CV_8S:  r = "8S"; break;
-        case CV_16U: r = "16U"; break;
-        case CV_16S: r = "16S"; break;
-        case CV_32S: r = "32S"; break;
-        case CV_32F: r = "32F"; break;
-        case CV_64F: r = "64F"; break;
-        default:     r = "User"; break;
-    }
-
-    r += "C";
-    r += (chans+'0');
-
-    return r;
-    }
 
 int main(int argc, char** argv)
 {
@@ -69,62 +50,29 @@ int main(int argc, char** argv)
 
     // Load the input image
     cv::Mat image = cv::imread(argv[1], cv::IMREAD_COLOR);
-
     if ( !image.data )
     {
         printf("No image data \n");
         return -1;
     }
-
-    // Get the number of rows (height) and columns (width)
     int height = image.rows;
     int width = image.cols;
+    int num_channels = image.channels();
 
-    int mat_type = image.type();
-    cout<<"height: "<< height<<endl;
-    cout<<"width: "<< width<<endl;
-    cout<<"type: "<<type2str(mat_type)<<endl;
+    unsigned char* bgr_array = new unsigned char[height * width * num_channels]; 
+    // Copy data from cv::Mat to the array 
+    std::memcpy(bgr_array, image.data, height * width * num_channels * sizeof(unsigned char));
 
-    // Convert the image to a vector
-    std::vector<uchar> image_vector;
-    if (image.isContinuous()) {
-        // If the image is stored in a continuous block of memory
-        image_vector.assign(image.datastart, image.dataend);
-    } else {
-        // If the image is not stored in a continuous block of memory
-        for (int i = 0; i < image.rows; ++i) {
-        image_vector.insert(image_vector.end(), image.ptr<uchar>(i), image.ptr<uchar>(i) + image.cols * image.channels());
-        }
-    }
-    std::vector<int> int_image_vector(image_vector.begin(), image_vector.end());
-    cout<<int_image_vector.size()<<endl;
-    for (int i = 0; i < 100; i++)
-    {
-        cout<<(int)int_image_vector[i]<<" ";
-    }
-    cout<<(int)int_image_vector[100]<<" "<<(int)int_image_vector[100+height*width]<<" "<<(int)int_image_vector[100+2*height*width]<<endl;
-    
-    cv::Mat gray_image;
-    cv::cvtColor(image, gray_image, cv::COLOR_BGR2GRAY);
+    unsigned char* gray_array = new unsigned char[height * width]; 
+    convert_bgr_2_gray_cpu(bgr_array, gray_array, height, width);
 
-    // Convert the image to a vector
-    std::vector<uchar> gray_image_vector;
-    if (gray_image.isContinuous()) {
-        // If the image is stored in a continuous block of memory
-        gray_image_vector.assign(gray_image.datastart, gray_image.dataend);
-    } else {
-        // If the image is not stored in a continuous block of memory
-        for (int i = 0; i < gray_image.rows; ++i) {
-        gray_image_vector.insert(gray_image_vector.end(), gray_image.ptr<uchar>(i), gray_image.ptr<uchar>(i) + gray_image.cols * gray_image.channels());
-        }
-    }
-    std::vector<int> int_gray_image_vector(gray_image_vector.begin(), gray_image_vector.end());
-    cout<<int_gray_image_vector.size()<<endl;
-    for (int i = 0; i < 50; i++)
-    {
-        cout<<(int)int_gray_image_vector[i]<<" ";
-    }
-    cout<<(int)int_gray_image_vector[100]<<endl;
-    
+    cv::Mat gray_image(height, width, CV_8UC1, gray_array);
+    cv::imwrite("gray_image_cpu.png", gray_image);
+
+    unsigned char* gpu_gray_array = new unsigned char[height * width]; 
+    convert_bgr_2_gray_gpu(bgr_array, gpu_gray_array, height, width);
+
+    cv::Mat gpu_gray_image(height, width, CV_8UC1, gpu_gray_array);
+    cv::imwrite("gray_image_gpu.png", gpu_gray_image);
     return 0;
 }
