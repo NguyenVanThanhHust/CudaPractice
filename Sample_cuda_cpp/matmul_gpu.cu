@@ -27,8 +27,8 @@ void matmul(int *host_a, int *host_b, int *host_c, int m, int n, int p)
     checkCudaErrors(cudaMalloc(&dev_b, size_b));
     checkCudaErrors(cudaMalloc(&dev_c, size_c));
 
-    cudaMemcpy(dev_a, host_a, size_a, cudaMemcpyHostToDevice);
-    cudaMemcpy(dev_b, host_b, size_b, cudaMemcpyHostToDevice);
+    checkCudaErrors(cudaMemcpy(dev_a, host_a, size_a, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(dev_b, host_b, size_b, cudaMemcpyHostToDevice));
 
     unsigned int grid_rows = (m + BLOCK_SIZE - 1) / BLOCK_SIZE;
     unsigned int grid_cols = (p + BLOCK_SIZE - 1) / BLOCK_SIZE;

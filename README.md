@@ -18,8 +18,9 @@ docker build -f dockers/nsight-compute.Dockerfile --tag=cuda_benchmark_img:12.1.
 ```
 
 ## TODO
-- [ ] Convert opencv from BGR to gray format on CUDA.
-- [ ] Matrix multiplication template
+- [ ] Batch Matrix multiplication template
+- [ ] Python binding template
+- [ ] Golang binding template
 
 ## Reference
 Performance measurement: https://leimao.github.io/blog/Docker-Nsight-Compute/

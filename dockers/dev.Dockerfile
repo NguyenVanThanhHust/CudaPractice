@@ -58,4 +58,11 @@ RUN echo "alias ...='cd .. && cd ..'" >> ~/.bashrc
 RUN echo "alias py=/usr/bin/python3" >> ~/.bashrc
 
 WORKDIR /opt/
+COPY go1.23.2.linux-amd64.tar.gz /opt/
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+RUN go version
+
+RUN apt update && apt install fish -y
+
 WORKDIR /workspace
