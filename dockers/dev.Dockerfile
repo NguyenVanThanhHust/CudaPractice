@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -48,7 +48,7 @@ RUN cmake .. -D BUILD_opencv_java=OFF \
       -D WITH_EIGEN=ON \
       -D BUILD_opencv_python=OFF \
       -D BUILD_opencv_python2=OFF \
-      -D BUILD_opencv_python3=OFF \
+      -D BUILD_opencv_python3=ON \
       -D CMAKE_BUILD_TYPE=RELEASE \
         .. 
 RUN make -j16 && make install && ldconfig 
