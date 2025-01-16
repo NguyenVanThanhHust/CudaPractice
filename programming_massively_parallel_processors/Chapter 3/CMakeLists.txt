@@ -14,13 +14,13 @@ add_executable(simpleVectorAdd simpleVectorAdd.cu)
 include_directories(simpleVectorAdd
   ../app-common/includes/
   ../includes/
-  /usr/local/cuda-11.2/include
+  /usr/local/cuda-12.3/include
   /usr/include/glib-2.0
   /usr/lib/x86_64-linux-gnu/glib-2.0/include
 )
 
 link_directories(
-  /usr/local/cuda-11.2/lib64/
+  /usr/local/cuda-12.3/lib64/
   /usr/local/cuda/lib64/
 )
 
