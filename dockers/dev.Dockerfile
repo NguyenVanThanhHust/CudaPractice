@@ -28,20 +28,20 @@ RUN apt-get update --fix-missing && apt-get install -y \
     libboost-all-dev \
  && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y libglfw3-dev libgl-dev libglu-dev
+RUN apt-get update && apt-get install -y libglfw3-dev libgl-dev unzip cmake libglu-dev
+
+WORKDIR /opt/
 RUN wget --no-check-certificate -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/4.9.0.zip
-RUN apt update && apt install unzip -y
-RUN apt update && apt install cmake -y
 RUN unzip opencv.zip
 
 WORKDIR /opt/opencv-4.9.0/build/
 RUN cmake .. -D BUILD_opencv_java=OFF \
--D WITH_EIGEN=ON \
--D BUILD_opencv_python=OFF \
--D BUILD_opencv_python2=OFF \
--D BUILD_opencv_python3=OFF \
--D CMAKE_BUILD_TYPE=RELEASE \
-.. 
+    -D WITH_EIGEN=ON \
+    -D BUILD_opencv_python=OFF \
+    -D BUILD_opencv_python2=OFF \
+    -D BUILD_opencv_python3=OFF \
+    -D CMAKE_BUILD_TYPE=RELEASE \
+    .. 
 RUN make -j16 && make install && ldconfig 
 
 RUN echo "alias ..='cd ..'" >> ~/.bashrc
@@ -54,9 +54,5 @@ RUN apt update && apt install fish -y
 WORKDIR /opt/
 RUN apt update && add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt install -y python3.10-full
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.10 get-pip.py 
-
-WORKDIR /opt/
-RUN python3.10 -m pip install cmake
-
-WORKDIR /workspace
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.10 get-pip.py
+# RUN pip3 install torch torchvision torchaudio

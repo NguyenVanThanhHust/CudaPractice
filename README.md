@@ -8,7 +8,7 @@ docker build -f dockers/dev.Dockerfile -t cuda_dev_img:12.3.2 .
 ```
 Build docker container
 ```
-docker run --name cuda_dev_ctn -it --gpus all --volume="$PWD:/workspace" cuda_dev_img:12.3.2 /bin/bash
+docker run --rm --name cuda_dev_ctn -it --gpus all --volume="$PWD:/workspace" -w /workspace/ cuda_dev_img:12.3.2 /bin/bash
 ```
 Start docker container 
 ```
