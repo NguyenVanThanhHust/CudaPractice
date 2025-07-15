@@ -42,5 +42,7 @@ namespace SampleNamespace {
     // Explicit template instantiations
     template void add<int>(const int* a, const int* b, int* c, int n);
     template void add<float>(const float* a, const float* b, float* c, int n);
+    template void add<__half>(const __half* a, const __half* b, __half* c, int n);
+    template void add<__nv_bfloat16>(const __nv_bfloat16* a, const __nv_bfloat16* b, __nv_bfloat16* c, int n);
 
 } // namespace SampleNamespace
