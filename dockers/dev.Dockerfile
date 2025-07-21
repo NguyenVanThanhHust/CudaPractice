@@ -1,3 +1,4 @@
+# FROM nvcr.io/nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04
 FROM nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -42,7 +43,7 @@ RUN cmake .. -D BUILD_opencv_java=OFF \
     -D BUILD_opencv_python3=OFF \
     -D CMAKE_BUILD_TYPE=RELEASE \
     .. 
-RUN make -j16 && make install && ldconfig 
+RUN make -j2 && make install && ldconfig 
 
 RUN echo "alias ..='cd ..'" >> ~/.bashrc
 RUN echo "alias ...='cd .. && cd ..'" >> ~/.bashrc
@@ -55,4 +56,5 @@ WORKDIR /opt/
 RUN apt update && add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt install -y python3.10-full
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.10 get-pip.py
-# RUN pip3 install torch torchvision torchaudio
+RUN apt update && apt install -y fish
+CMD ["/usr/bin/fish"]

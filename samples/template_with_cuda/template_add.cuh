@@ -3,8 +3,10 @@
 
 #include <cuda_runtime.h>
 #include <iostream>
+#include <cuda_fp16.h>
+#include <cuda_bf16.h>
 
-namespace SampleNamespace {
+namespace AddNamespace {
 
     // Template function declaration
     template <typename T>
@@ -14,5 +16,5 @@ namespace SampleNamespace {
     template <typename T>
     __global__ void addKernel(const T* a, const T* b, T* c, int n);
 
-} // namespace SampleNamespace
+} // namespace AddNamespace
 #endif // TEMPLATE_ADD_KERNEL_H

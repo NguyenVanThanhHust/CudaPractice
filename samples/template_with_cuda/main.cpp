@@ -17,7 +17,7 @@ int main() {
     }
 
     // Call the CUDA template function for integers
-    SampleNamespace::add(a, b, c, n);
+    AddNamespace::add(a, b, c, n);
 
     // Print the result for integers
     std::cout << "Result (int): ";
@@ -27,7 +27,7 @@ int main() {
     std::cout << std::endl;
 
     // Call the CUDA template function for floats
-    SampleNamespace::add(af, bf, cf, n);
+    AddNamespace::add(af, bf, cf, n);
 
     // Print the result for floats
     std::cout << "Result (float): ";
@@ -37,7 +37,7 @@ int main() {
     std::cout << std::endl;
 
     // Call the CUDA template function for float16
-    SampleNamespace::add(af16, bf16, cf16, n);
+    AddNamespace::add(af16, bf16, cf16, n);
 
     // Print the result for float 16
     std::cout << "Result (float 16): ";
